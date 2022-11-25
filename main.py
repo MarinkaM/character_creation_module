@@ -1,9 +1,11 @@
+import typing
+
 from random import randint
 
 from graphic_arts.start_game_banner import run_screensaver
 
 
-def attack(char_name: str, char_class: str) -> str:
+def attack(char_name: str, char_class: typing.Optional[str]) -> str:
     """Атака противника."""
     if char_class == 'warrior':
         return (f'{char_name} '
@@ -17,7 +19,7 @@ def attack(char_name: str, char_class: str) -> str:
     return (f'{char_name} не нанес урон противнику')
 
 
-def defence(char_name: str, char_class: str) -> str:
+def defence(char_name: str, char_class: typing.Optional[str]) -> str:
     """Защита."""
     if char_class == 'warrior':
         return (f'{char_name} блокировал {10 + randint(5, 10)} урона')
@@ -28,7 +30,7 @@ def defence(char_name: str, char_class: str) -> str:
     return (f'{char_name} не блокировал урона')
 
 
-def special(char_name: str, char_class: str) -> str:
+def special(char_name: str, char_class: typing.Optional[str]) -> str:
     """Применение специального умения."""
     if char_class == 'warrior':
         return (f'{char_name} '
@@ -40,7 +42,7 @@ def special(char_name: str, char_class: str) -> str:
     return (f'{char_name} не применил специальное умение')
 
 
-def start_training(char_name: str, char_class: str) -> str:
+def start_training(char_name: str, char_class: typing.Optional[str]) -> str:
     """Тренировка."""
     if char_class == 'warrior':
         print(f'{char_name}, ты Воитель — отличный боец ближнего боя.')
@@ -53,7 +55,7 @@ def start_training(char_name: str, char_class: str) -> str:
           'defence — чтобы блокировать атаку противника или'
           'special — чтобы использовать свою суперсилу.')
     print('Если не хочешь тренироваться, введи команду skip.')
-    cmd: str = None
+    cmd: typing.Optional[str] = None
     while cmd != 'skip':
         cmd = input('Введи команду: ')
         if cmd == 'attack':
@@ -65,10 +67,10 @@ def start_training(char_name: str, char_class: str) -> str:
     return 'Тренировка окончена.'
 
 
-def choice_char_class() -> str:
+def choice_char_class() -> typing.Optional[str]:
     """Выбор персонажа."""
-    approve_choice: str = None
-    char_class: str = None
+    approve_choice: typing.Optional[str] = None
+    char_class: typing.Optional[str] = None
     while approve_choice != 'y':
         char_class = input(
             'Введи название персонажа, за которого хочешь играть:'
@@ -97,5 +99,5 @@ if __name__ == '__main__':
           'Сейчас твоя выносливость — 80, атака — 5 и защита — 10.')
     print('Ты можешь выбрать один из трёх путей силы:')
     print('Воитель, Маг, Лекарь')
-    char_class: str = choice_char_class()
+    char_class: typing.Optional[str] = choice_char_class()
     print(start_training(char_name, char_class))
